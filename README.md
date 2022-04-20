@@ -6,14 +6,19 @@
 <table>
 <thead>
 <tr>
-<th>Egg Name</th>
-<th>Notes</th>
+	<th>Egg Name</th>
+	<th>Config files</th>
+	<th>Notes</th>
 </tr>
 </thead>
 
 <tbody>
 <tr>
 	<td><a href="">Squid Proxy</a></td>
+	<td>
+		squid/passwords <br>
+		squid/squid.conf
+	</td>
 	<td>
 	  <ul>
 	   	<li>Default port 3128</li>
