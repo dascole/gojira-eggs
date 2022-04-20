@@ -1,0 +1,11 @@
+version: '3.5'
+services:
+  httpbin:
+    image: "kennethreitz/httpbin"
+    container_name: httpbin
+    ports:
+      - 9090:8080
+    labels:
+      com.konghq.gojira: "True"
+    networks:
+    - gojira

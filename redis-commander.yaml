@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  squid:
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    ports:
+    - "8081:8081"
+    labels:
+      com.konghq.gojira: "True"
+    environment:
+      REDIS_HOSTS: kong-ee-2800_redis_1
+    networks:
+    - gojira

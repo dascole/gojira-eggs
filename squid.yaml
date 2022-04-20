@@ -1,0 +1,20 @@
+version: '3.5'
+services:
+  squid:
+    image: ${SQUID_IMAGE:-sameersbn/squid:3.5.27-2}
+    container_name: squid
+    ports:
+      - "3128:3128/tcp"
+    labels:
+      com.konghq.gojira: "True"
+    volumes:
+      - ${PWD}/squid/squid.conf:/etc/squid/squid.conf
+      - ${PWD}/squid/passwords:/etc/squid/passwords
+    healthcheck:
+      interval: 5s
+      retries: 10
+      test: ["CMD", "kill", "-0", "1"]
+      timeout: 20s
+    stop_signal: SIGKILL
+    networks:
+    - gojira

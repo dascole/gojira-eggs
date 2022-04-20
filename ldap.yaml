@@ -1,0 +1,33 @@
+version: '3.5'
+services:
+  openldap_server:
+    image: osixia/openldap:latest
+    container_name: OpenLdap
+    command: --loglevel debug
+    ports: 
+      - "389:389"
+      - "636:636"
+    labels:
+      com.konghq.gojira: "True"
+    environment:
+      - LDAP_ORGANISATION=Contoso Ltd.
+      - LDAP_DOMAIN=contoso.com
+      - LDAP_BASE_DN=dc=contoso,dc=com
+      - LDAP_ADMIN_PASSWORD=changeme
+      - LDAP_CONFIG_PASSWORD=changeme
+      - LDAP_READONLY_USER=true
+      - LDAP_READONLY_USER_USERNAME=ldap-ro
+      - LDAP_READONLY_USER_PASSWORD=changeme
+    volumes:
+      - ${PWD}/ldap-examples/:/data/ldif
+    networks:
+    - gojira
+  ldap_server_admin:
+    image: osixia/phpldapadmin:0.7.2
+    ports:
+      - 8090:80
+    environment:
+      PHPLDAPADMIN_LDAP_HOSTS: openldap_server
+      PHPLDAPADMIN_HTTPS: 'false'
+    networks:
+    - gojira

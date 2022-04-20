@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  keycloak:
+    image: jboss/keycloak:9.0.0
+    container_name: keycloak
+    ports:
+      - 9977:8080
+    labels:
+      com.konghq.gojira: "True"
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=test
+    networks:
+    - gojira
